@@ -2,6 +2,7 @@
    SECTION 09 — DARPAN CONSTRUCTION
    Premium Architectural Developer & Brand Banner
    Deep Charcoal #171613 with Center Masked Architecture
+   Responsive Production Pass — Proportional Logo
    ═══════════════════════════════════════════════════════════ */
 
 .developer {
@@ -12,6 +13,13 @@
   border-top: 1px solid rgba(243, 239, 231, 0.1);
   border-bottom: 1px solid rgba(243, 239, 231, 0.1);
   box-sizing: border-box;
+  width: 100%;
+  min-height: 100svh;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
 }
 
 /* ── COMPACT HORIZONTAL EDITORIAL BANNER ───────────────── */
@@ -19,12 +27,11 @@
   position: relative;
   width: 100%;
   max-width: 1440px;
-  min-height: 440px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 34% 42% 24%;
   align-items: center;
-  padding: clamp(2.5rem, 4.5vh, 3.8rem) clamp(1.5rem, 3.5vw, 4rem);
+  padding: clamp(3rem, 6vh, 5rem) clamp(1.5rem, 3.5vw, 4rem);
   box-sizing: border-box;
 }
 
@@ -83,7 +90,7 @@
 
 .developer__title {
   font-family: var(--font-editorial);
-  font-size: clamp(2.3rem, 3.6vw, 3.6rem);
+  font-size: clamp(2.2rem, 3.5vw, 3.6rem);
   font-weight: 300;
   line-height: 1.02;
   color: #F8F7F3;
@@ -136,6 +143,8 @@
   letter-spacing: 0.06em;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  min-height: 40px;
+  text-decoration: none;
 }
 
 .developer__story-btn:hover {
@@ -162,7 +171,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  min-height: 380px;
+  min-height: 360px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -202,19 +211,20 @@
 .developer__logo-container {
   position: relative;
   width: 100%;
-  max-width: 320px;
+  max-width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 2;
   padding: 1rem;
+  box-sizing: border-box;
 }
 
 .developer__logo-glow {
   position: absolute;
-  width: 220px;
-  height: 180px;
+  width: 200px;
+  height: 160px;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(23, 22, 19, 0) 70%);
   filter: blur(25px);
   pointer-events: none;
@@ -222,6 +232,8 @@
 
 .developer__white-logo {
   filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.6));
+  height: auto;
+  max-width: 100%;
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -255,7 +267,7 @@
 .developer__values-list {
   display: flex;
   flex-direction: column;
-  gap: clamp(14px, 2.4vh, 22px);
+  gap: clamp(12px, 2.2vh, 20px);
   padding-left: 0;
 }
 
@@ -309,15 +321,19 @@
   .developer__banner {
     grid-template-columns: 1fr;
     gap: 2.5rem;
-    padding: 3.5rem 1.5rem;
+    padding: 3.5rem var(--container-padding);
   }
 
   .developer__editorial-pane {
     align-items: flex-start;
   }
 
+  .developer__copy {
+    max-width: 100%;
+  }
+
   .developer__center-stage {
-    min-height: 280px;
+    min-height: 260px;
     padding: 1rem 0;
   }
 
@@ -333,19 +349,19 @@
 
 @media (max-width: 480px) {
   .developer__banner {
-    padding: 3rem 1.25rem;
+    padding: 3rem var(--container-padding);
     gap: 2rem;
   }
 
   .developer__title {
-    font-size: 2.2rem;
+    font-size: clamp(2rem, 8vw, 2.5rem);
   }
 
   .developer__logo-container {
-    max-width: 260px;
+    max-width: 240px;
   }
 
   .developer__value-text {
-    font-size: 1rem;
+    font-size: 1.05rem;
   }
 }

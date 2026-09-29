@@ -1,14 +1,15 @@
 /* ═══════════════════════════════════════════════════════════
    SECTION 05 — THE VISION
    Editorial Architecture Spread + Right-to-Left Scroll Reveal
+   Responsive Production Pass — No Overflow
    ═══════════════════════════════════════════════════════════ */
 
 .vision {
   position: relative;
   background-color: var(--bg);
   border-top: var(--border-architectural);
-  padding-top: clamp(3rem, 6vh, 5rem);
-  padding-bottom: clamp(3rem, 6vh, 5rem);
+  padding-top: clamp(2.5rem, 5vh, 4.5rem);
+  padding-bottom: clamp(2.5rem, 5vh, 4.5rem);
   box-sizing: border-box;
   overflow: hidden;
   width: 100%;
@@ -19,8 +20,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: clamp(1rem, 2vh, 1.5rem);
-  margin-bottom: clamp(1.5rem, 3vh, 2.5rem);
+  padding-bottom: clamp(0.75rem, 1.8vh, 1.25rem);
+  margin-bottom: clamp(1.25rem, 2.5vh, 2.25rem);
   border-bottom: 1px solid rgba(23, 22, 19, 0.12);
 }
 
@@ -68,16 +69,16 @@
 /* ── MAIN EDITORIAL COMPOSITION ────────────────────────────── */
 .vision__composition {
   display: grid;
-  grid-template-columns: 42fr 58fr;
-  gap: clamp(2rem, 5vw, 4.5rem);
+  grid-template-columns: 44fr 56fr;
+  gap: clamp(1.8rem, 4.5vw, 4rem);
   align-items: center;
-  margin-bottom: clamp(2.5rem, 5vh, 4rem);
+  margin-bottom: clamp(2rem, 4.5vh, 3.5rem);
 }
 
 /* Left Editorial Content */
 .vision__editorial {
   display: flex;
-  gap: clamp(1rem, 2vw, 1.75rem);
+  gap: clamp(0.75rem, 1.8vw, 1.5rem);
   align-items: stretch;
 }
 
@@ -91,15 +92,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: clamp(1.25rem, 2.5vh, 2rem);
+  gap: clamp(1rem, 2vh, 1.75rem);
   max-width: 500px;
 }
 
 .vision__title {
   font-family: var(--font-editorial);
-  font-size: clamp(2.4rem, 4.2vw, 3.8rem);
+  font-size: clamp(2rem, 3.6vw, 3.8rem);
   font-weight: 300;
-  line-height: 0.95;
+  line-height: 0.96;
   letter-spacing: -0.02em;
   color: var(--text-primary);
   text-transform: uppercase;
@@ -112,7 +113,8 @@
 .vision__title-line {
   display: block;
   overflow: hidden;
-  white-space: nowrap;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .vision__char-wrap {
@@ -135,7 +137,7 @@
 
 .vision__copy {
   font-family: var(--font-primary);
-  font-size: clamp(0.875rem, 1vw, 0.95rem);
+  font-size: clamp(0.8125rem, 0.9vw, 0.95rem);
   line-height: 1.65;
   color: var(--text-charcoal);
   margin: 0;
@@ -178,6 +180,7 @@
   text-decoration: none;
   transition: all var(--duration-fast) var(--ease-out);
   width: fit-content;
+  min-height: 44px;
 }
 
 .vision__cta:hover {
@@ -240,11 +243,11 @@
 }
 
 .vision__fact-item {
-  padding: clamp(1rem, 2vh, 1.5rem) clamp(0.75rem, 1.5vw, 1.25rem);
+  padding: clamp(0.9rem, 1.8vh, 1.4rem) clamp(0.6rem, 1.2vw, 1.1rem);
   border-right: 1px solid rgba(23, 22, 19, 0.12);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   box-sizing: border-box;
 }
 
@@ -254,7 +257,7 @@
 
 .vision__fact-value {
   font-family: var(--font-editorial);
-  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  font-size: clamp(1.4rem, 2vw, 2.1rem);
   font-weight: 300;
   line-height: 1;
   letter-spacing: -0.01em;
@@ -278,7 +281,7 @@
   line-height: 1.3;
 }
 
-/* ── RESPONSIVE ────────────────────────────────────────────── */
+/* ── RESPONSIVE MEDIA QUERIES ─────────────────────────────── */
 @media (max-width: 1024px) {
   .vision__composition {
     grid-template-columns: 1fr;
@@ -316,11 +319,15 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-lg);
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-lg);
   }
 
   .vision__editorial {
     gap: var(--space-sm);
+  }
+
+  .vision__title {
+    font-size: clamp(2rem, 8vw, 2.8rem);
   }
 
   .vision__image-frame {
@@ -335,8 +342,20 @@
     border-right: none;
   }
 
+  .vision__fact-item:nth-child(3) {
+    border-right: 1px solid rgba(23, 22, 19, 0.12);
+  }
+
   .vision__fact-item:nth-child(n+3) {
     border-top: 1px solid rgba(23, 22, 19, 0.12);
+  }
+}
+
+@media (max-width: 480px) {
+  .vision__visual-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
   }
 }
 

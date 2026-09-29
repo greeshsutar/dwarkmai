@@ -10,331 +10,274 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Residences() {
   const sectionRef = useRef<HTMLElement>(null);
-  const study1PinRef = useRef<HTMLDivElement>(null);
-  const study2PinRef = useRef<HTMLDivElement>(null);
+  const study1Ref = useRef<HTMLDivElement>(null);
+  const study2Ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion) {
+      gsap.set('.anno-line', { strokeDashoffset: 0 });
+      gsap.set(['.anno-dot', '.anno-text-group', '.anno-group--entry', '.residences__schematic-footer-meta'], { opacity: 1 });
+      return;
+    }
 
     const ctx = gsap.context(() => {
-      // ═════════════════════════════════════════════════════════════
-      // 1 BHK PROGRESSIVE SCROLL-PINNED SEQUENCE WITH CLEAR GAPS
-      // ═════════════════════════════════════════════════════════════
-      if (study1PinRef.current) {
-        const board = study1PinRef.current;
+      // ── 01 BHK IN-PLACE PROGRESSIVE ANNOTATION REVEAL ────────
+      if (study1Ref.current) {
+        const board = study1Ref.current;
         const tl1 = gsap.timeline({
           scrollTrigger: {
             trigger: board,
-            start: 'top top',
-            end: '+=160%',
-            pin: true,
-            scrub: 0.6,
-            anticipatePin: 1,
+            start: 'top 70%',
+            toggleActions: 'play none none reverse',
           },
         });
 
-        // Step 0: Plan emerges clean & subtle
         tl1.fromTo(
           board.querySelector('.residences__plan-wrapper'),
-          { opacity: 0.5, scale: 0.98 },
-          { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' }
+          { opacity: 0.6, scale: 0.98 },
+          { opacity: 1, scale: 1, duration: 0.7, ease: 'power2.out' }
         )
-        // GAP
-        .to({}, { duration: 0.6 })
-
-        // Step 1: ENTRY arrow
         .fromTo(
           board.querySelector('.anno-group--entry'),
           { opacity: 0, x: -15 },
-          { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out' }
+          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
+          '-=0.2'
         )
-        // GAP
-        .to({}, { duration: 0.7 })
-
-        // Step 2: LIVING & DINING (Draw line, pop dot, reveal text)
         .fromTo(
           board.querySelector('.anno-group--living .anno-dot'),
           { scale: 0, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }
+          { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' },
+          '-=0.1'
         )
         .fromTo(
           board.querySelector('.anno-group--living .anno-line'),
           { strokeDashoffset: 200 },
-          { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' },
+          { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' },
           '<'
         )
         .fromTo(
           board.querySelector('.anno-group--living .anno-text-group'),
-          { opacity: 0, x: -12 },
-          { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' },
-          '<0.2'
+          { opacity: 0, x: -10 },
+          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
+          '<0.15'
         )
-        // GAP
-        .to({}, { duration: 0.7 })
-
-        // Step 3: KITCHEN
         .fromTo(
           board.querySelector('.anno-group--kitchen .anno-dot'),
           { scale: 0, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }
+          { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' },
+          '-=0.2'
         )
         .fromTo(
           board.querySelector('.anno-group--kitchen .anno-line'),
           { strokeDashoffset: 200 },
-          { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' },
+          { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' },
           '<'
         )
         .fromTo(
           board.querySelector('.anno-group--kitchen .anno-text-group'),
-          { opacity: 0, x: -12 },
-          { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' },
-          '<0.2'
+          { opacity: 0, x: -10 },
+          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
+          '<0.15'
         )
-        // GAP
-        .to({}, { duration: 0.7 })
-
-        // Step 4: BEDROOM
         .fromTo(
           board.querySelector('.anno-group--bed .anno-dot'),
           { scale: 0, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }
+          { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' },
+          '-=0.2'
         )
         .fromTo(
           board.querySelector('.anno-group--bed .anno-line'),
           { strokeDashoffset: 200 },
-          { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' },
+          { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' },
           '<'
         )
         .fromTo(
           board.querySelector('.anno-group--bed .anno-text-group'),
-          { opacity: 0, x: 12 },
-          { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' },
-          '<0.2'
+          { opacity: 0, x: 10 },
+          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
+          '<0.15'
         )
-        // GAP
-        .to({}, { duration: 0.7 })
-
-        // Step 5: BATH
         .fromTo(
           board.querySelector('.anno-group--bath .anno-dot'),
           { scale: 0, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }
+          { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' },
+          '-=0.2'
         )
         .fromTo(
           board.querySelector('.anno-group--bath .anno-line'),
           { strokeDashoffset: 200 },
-          { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' },
+          { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' },
           '<'
         )
         .fromTo(
           board.querySelector('.anno-group--bath .anno-text-group'),
-          { opacity: 0, x: 12 },
-          { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' },
-          '<0.2'
+          { opacity: 0, x: 10 },
+          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
+          '<0.15'
         )
-        // GAP
-        .to({}, { duration: 0.7 })
-
-        // Step 6: BALCONY DECK
         .fromTo(
           board.querySelector('.anno-group--balcony .anno-dot'),
           { scale: 0, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }
+          { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' },
+          '-=0.2'
         )
         .fromTo(
           board.querySelector('.anno-group--balcony .anno-line'),
           { strokeDashoffset: 200 },
-          { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' },
+          { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' },
           '<'
         )
         .fromTo(
           board.querySelector('.anno-group--balcony .anno-text-group'),
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
-          '<0.2'
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+          '<0.15'
         )
-        // GAP
-        .to({}, { duration: 0.7 })
-
-        // Step 7: Schematic diagrams at bottom
         .fromTo(
           board.querySelector('.residences__schematic-footer-meta'),
-          { opacity: 0, y: 15 },
-          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
-        )
-        // Holding pause at completion before unpinning
-        .to({}, { duration: 0.8 });
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+          '-=0.2'
+        );
       }
 
-      // ═════════════════════════════════════════════════════════════
-      // 2 BHK PROGRESSIVE SCROLL-PINNED SEQUENCE WITH CLEAR GAPS
-      // ═════════════════════════════════════════════════════════════
-      if (study2PinRef.current) {
-        const board = study2PinRef.current;
+      // ── 02 BHK IN-PLACE PROGRESSIVE ANNOTATION REVEAL ────────
+      if (study2Ref.current) {
+        const board = study2Ref.current;
         const tl2 = gsap.timeline({
           scrollTrigger: {
             trigger: board,
-            start: 'top top',
-            end: '+=180%',
-            pin: true,
-            scrub: 0.6,
-            anticipatePin: 1,
+            start: 'top 70%',
+            toggleActions: 'play none none reverse',
           },
         });
 
-        // Step 0: Plan emerges clean & subtle
         tl2.fromTo(
           board.querySelector('.residences__plan-wrapper'),
-          { opacity: 0.5, scale: 0.98 },
-          { opacity: 1, scale: 1, duration: 0.8, ease: 'power2.out' }
+          { opacity: 0.6, scale: 0.98 },
+          { opacity: 1, scale: 1, duration: 0.7, ease: 'power2.out' }
         )
-        // GAP
-        .to({}, { duration: 0.6 })
-
-        // Step 1: ENTRY arrow
         .fromTo(
           board.querySelector('.anno-group--entry'),
           { opacity: 0, x: -15 },
-          { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out' }
+          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
+          '-=0.2'
         )
-        // GAP
-        .to({}, { duration: 0.7 })
-
-        // Step 2: LIVING & DINING
         .fromTo(
           board.querySelector('.anno-group--living .anno-dot'),
           { scale: 0, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }
+          { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' },
+          '-=0.1'
         )
         .fromTo(
           board.querySelector('.anno-group--living .anno-line'),
           { strokeDashoffset: 200 },
-          { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' },
+          { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' },
           '<'
         )
         .fromTo(
           board.querySelector('.anno-group--living .anno-text-group'),
-          { opacity: 0, x: -12 },
-          { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' },
-          '<0.2'
+          { opacity: 0, x: -10 },
+          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
+          '<0.15'
         )
-        // GAP
-        .to({}, { duration: 0.7 })
-
-        // Step 3: KITCHEN
         .fromTo(
           board.querySelector('.anno-group--kitchen .anno-dot'),
           { scale: 0, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }
+          { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' },
+          '-=0.2'
         )
         .fromTo(
           board.querySelector('.anno-group--kitchen .anno-line'),
           { strokeDashoffset: 200 },
-          { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' },
+          { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' },
           '<'
         )
         .fromTo(
           board.querySelector('.anno-group--kitchen .anno-text-group'),
-          { opacity: 0, x: -12 },
-          { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' },
-          '<0.2'
+          { opacity: 0, x: -10 },
+          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
+          '<0.15'
         )
-        // GAP
-        .to({}, { duration: 0.7 })
-
-        // Step 4: MASTER BED (from top)
         .fromTo(
           board.querySelector('.anno-group--master .anno-dot'),
           { scale: 0, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }
+          { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' },
+          '-=0.2'
         )
         .fromTo(
           board.querySelector('.anno-group--master .anno-line'),
           { strokeDashoffset: 200 },
-          { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' },
+          { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' },
           '<'
         )
         .fromTo(
           board.querySelector('.anno-group--master .anno-text-group'),
-          { opacity: 0, y: -12 },
-          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
-          '<0.2'
+          { opacity: 0, y: -10 },
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+          '<0.15'
         )
-        // GAP
-        .to({}, { duration: 0.7 })
-
-        // Step 5: BEDROOM 02 (from right)
         .fromTo(
           board.querySelector('.anno-group--bed2 .anno-dot'),
           { scale: 0, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }
+          { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' },
+          '-=0.2'
         )
         .fromTo(
           board.querySelector('.anno-group--bed2 .anno-line'),
           { strokeDashoffset: 200 },
-          { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' },
+          { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' },
           '<'
         )
         .fromTo(
           board.querySelector('.anno-group--bed2 .anno-text-group'),
-          { opacity: 0, x: 12 },
-          { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' },
-          '<0.2'
+          { opacity: 0, x: 10 },
+          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
+          '<0.15'
         )
-        // GAP
-        .to({}, { duration: 0.7 })
-
-        // Step 6: EN-SUITE BATH (from right)
         .fromTo(
           board.querySelector('.anno-group--ensuite .anno-dot'),
           { scale: 0, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }
+          { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' },
+          '-=0.2'
         )
         .fromTo(
           board.querySelector('.anno-group--ensuite .anno-line'),
           { strokeDashoffset: 200 },
-          { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' },
+          { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' },
           '<'
         )
         .fromTo(
           board.querySelector('.anno-group--ensuite .anno-text-group'),
-          { opacity: 0, x: 12 },
-          { opacity: 1, x: 0, duration: 0.7, ease: 'power2.out' },
-          '<0.2'
+          { opacity: 0, x: 10 },
+          { opacity: 1, x: 0, duration: 0.5, ease: 'power2.out' },
+          '<0.15'
         )
-        // GAP
-        .to({}, { duration: 0.7 })
-
-        // Step 7: BALCONY DECK (from bottom)
         .fromTo(
           board.querySelector('.anno-group--balcony .anno-dot'),
           { scale: 0, opacity: 0 },
-          { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(2)' }
+          { scale: 1, opacity: 1, duration: 0.4, ease: 'back.out(2)' },
+          '-=0.2'
         )
         .fromTo(
           board.querySelector('.anno-group--balcony .anno-line'),
           { strokeDashoffset: 200 },
-          { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' },
+          { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out' },
           '<'
         )
         .fromTo(
           board.querySelector('.anno-group--balcony .anno-text-group'),
-          { opacity: 0, y: 12 },
-          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
-          '<0.2'
+          { opacity: 0, y: 10 },
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+          '<0.15'
         )
-        // GAP
-        .to({}, { duration: 0.7 })
-
-        // Step 8: Schematic diagrams at bottom
         .fromTo(
           board.querySelector('.residences__schematic-footer-meta'),
-          { opacity: 0, y: 15 },
-          { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
-        )
-        // Holding pause before unpinning
-        .to({}, { duration: 0.8 });
+          { opacity: 0, y: 12 },
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+          '-=0.2'
+        );
       }
     }, sectionRef);
 
@@ -366,9 +309,9 @@ export default function Residences() {
       </div>
 
       {/* ═════════════════════════════════════════════════════════════
-          01 BHK ARCHITECTURAL PRESENTATION BOARD (PINNED SCROLL)
+          01 BHK ARCHITECTURAL PRESENTATION BOARD
           ═════════════════════════════════════════════════════════════ */}
-      <div className="residences__board-section" ref={study1PinRef}>
+      <div className="residences__board-section" ref={study1Ref}>
         <div className="container residences__board-container">
           <div className="residences__board">
             {/* Top Identity & Dimension Header */}
@@ -531,9 +474,9 @@ export default function Residences() {
       </div>
 
       {/* ═════════════════════════════════════════════════════════════
-          02 BHK ARCHITECTURAL PRESENTATION BOARD (PINNED SCROLL)
+          02 BHK ARCHITECTURAL PRESENTATION BOARD
           ═════════════════════════════════════════════════════════════ */}
-      <div className="residences__board-section" ref={study2PinRef}>
+      <div className="residences__board-section" ref={study2Ref}>
         <div className="container residences__board-container">
           <div className="residences__board">
             {/* Top Identity & Dimension Header */}

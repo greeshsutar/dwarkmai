@@ -17,136 +17,129 @@ export default function FinalStatement() {
       const container = containerRef.current;
       if (!container) return;
 
-      // Ensure all statements start completely hidden
-      gsap.set('.stmt', { autoAlpha: 0 });
+      const mm = gsap.matchMedia();
 
-      // ── MASTER TIMELINE: STRICTLY SEQUENTIAL (NO OVERLAP) ───
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container,
-          start: 'top top',
-          end: '+=600%',
-          pin: true,
-          scrub: 1,
-          anticipatePin: 1,
+      mm.add(
+        {
+          isDesktop: '(min-width: 1025px)',
+          isTablet: '(min-width: 769px) and (max-width: 1024px)',
+          isMobile: '(max-width: 768px)',
         },
-      });
+        (context) => {
+          const { isMobile } = context.conditions as { isMobile: boolean };
+          const yDist = isMobile ? 40 : 75;
+          const endDist = isMobile ? '+=380%' : '+=540%';
 
-      // ══════════════════════════════════════════════════════════
-      // STATEMENT 01: "A HOME / ABOVE THE / ORDINARY."
-      // ══════════════════════════════════════════════════════════
-      // 1. Activate statement 1
-      tl.set('.stmt--1', { autoAlpha: 1 })
-      // 2. Wave entrance for lines
-      .fromTo(
-        '.stmt--1 .stmt__line',
-        { y: 80, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.0, stagger: 0.12, ease: 'power3.out' }
-      )
-      // 3. Hold / Fully visible
-      .to({}, { duration: 1.2 })
-      // 4. Exit completely upward
-      .to(
-        '.stmt--1 .stmt__line',
-        { y: -80, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'power3.in' }
-      )
-      // 5. Hide statement 1 completely
-      .set('.stmt--1', { autoAlpha: 0 })
-      // 6. Clean empty frame gap
-      .to({}, { duration: 0.6 })
+          // Ensure all statements start completely hidden
+          gsap.set('.stmt', { autoAlpha: 0 });
 
-      // ══════════════════════════════════════════════════════════
-      // STATEMENT 02: "DESIGNED / FOR EVERYDAY / LIVING."
-      // ══════════════════════════════════════════════════════════
-      // 1. Activate statement 2 only after statement 1 is fully gone
-      .set('.stmt--2', { autoAlpha: 1 })
-      // 2. Wave entrance
-      .fromTo(
-        '.stmt--2 .stmt__line',
-        { y: 80, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.0, stagger: 0.12, ease: 'power3.out' }
-      )
-      // 3. Hold
-      .to({}, { duration: 1.2 })
-      // 4. Exit completely upward
-      .to(
-        '.stmt--2 .stmt__line',
-        { y: -80, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'power3.in' }
-      )
-      // 5. Hide statement 2
-      .set('.stmt--2', { autoAlpha: 0 })
-      // 6. Clean empty frame gap
-      .to({}, { duration: 0.6 })
+          // ── MASTER TIMELINE: STRICTLY SEQUENTIAL (NO OVERLAP) ───
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: container,
+              start: 'top top',
+              end: endDist,
+              pin: true,
+              scrub: 1,
+              invalidateOnRefresh: true,
+            },
+          });
 
-      // ══════════════════════════════════════════════════════════
-      // STATEMENT 03: "LIGHT. / SPACE. / COMFORT."
-      // ══════════════════════════════════════════════════════════
-      .set('.stmt--3', { autoAlpha: 1 })
-      .fromTo(
-        '.stmt--3 .stmt__line',
-        { y: 80, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.0, stagger: 0.15, ease: 'power3.out' }
-      )
-      .to({}, { duration: 1.2 })
-      .to(
-        '.stmt--3 .stmt__line',
-        { y: -80, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'power3.in' }
-      )
-      .set('.stmt--3', { autoAlpha: 0 })
-      .to({}, { duration: 0.6 })
+          // Buffer before first statement starts
+          tl.to({}, { duration: 0.4 })
 
-      // ══════════════════════════════════════════════════════════
-      // STATEMENT 04: "ROOTED IN / SAWANTWADI."
-      // ══════════════════════════════════════════════════════════
-      .set('.stmt--4', { autoAlpha: 1 })
-      .fromTo(
-        '.stmt--4 .stmt__line',
-        { y: 80, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.0, stagger: 0.12, ease: 'power3.out' }
-      )
-      .to({}, { duration: 1.2 })
-      .to(
-        '.stmt--4 .stmt__line',
-        { y: -80, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'power3.in' }
-      )
-      .set('.stmt--4', { autoAlpha: 0 })
-      .to({}, { duration: 0.6 })
+          // STATEMENT 01
+          .set('.stmt--1', { autoAlpha: 1 })
+          .fromTo(
+            '.stmt--1 .stmt__line',
+            { y: yDist, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.0, stagger: 0.12, ease: 'power3.out' }
+          )
+          .to({}, { duration: 1.2 })
+          .to(
+            '.stmt--1 .stmt__line',
+            { y: -yDist, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'power3.in' }
+          )
+          .set('.stmt--1', { autoAlpha: 0 })
+          .to({}, { duration: 0.6 })
 
-      // ══════════════════════════════════════════════════════════
-      // STATEMENT 05: "CRAFTED WITH / INTENTION."
-      // ══════════════════════════════════════════════════════════
-      .set('.stmt--5', { autoAlpha: 1 })
-      .fromTo(
-        '.stmt--5 .stmt__line',
-        { y: 80, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.0, stagger: 0.12, ease: 'power3.out' }
-      )
-      .to({}, { duration: 1.2 })
-      .to(
-        '.stmt--5 .stmt__line',
-        { y: -80, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'power3.in' }
-      )
-      .set('.stmt--5', { autoAlpha: 0 })
-      .to({}, { duration: 0.6 })
+          // STATEMENT 02
+          .set('.stmt--2', { autoAlpha: 1 })
+          .fromTo(
+            '.stmt--2 .stmt__line',
+            { y: yDist, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.0, stagger: 0.12, ease: 'power3.out' }
+          )
+          .to({}, { duration: 1.2 })
+          .to(
+            '.stmt--2 .stmt__line',
+            { y: -yDist, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'power3.in' }
+          )
+          .set('.stmt--2', { autoAlpha: 0 })
+          .to({}, { duration: 0.6 })
 
-      // ══════════════════════════════════════════════════════════
-      // STATEMENT 06 (FINAL): "DWARKAMAI." + "SAWANTWADI · SINDHUDURG"
-      // ══════════════════════════════════════════════════════════
-      .set('.stmt--6', { autoAlpha: 1 })
-      .fromTo(
-        ['.stmt--6 .stmt__main-title', '.stmt--6 .stmt__subtitle'],
-        { y: 80, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.1, stagger: 0.18, ease: 'power3.out' }
-      )
-      // Generous hold on the final statement before unpinning
-      .to({}, { duration: 1.8 });
+          // STATEMENT 03
+          .set('.stmt--3', { autoAlpha: 1 })
+          .fromTo(
+            '.stmt--3 .stmt__line',
+            { y: yDist, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.0, stagger: 0.15, ease: 'power3.out' }
+          )
+          .to({}, { duration: 1.2 })
+          .to(
+            '.stmt--3 .stmt__line',
+            { y: -yDist, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'power3.in' }
+          )
+          .set('.stmt--3', { autoAlpha: 0 })
+          .to({}, { duration: 0.6 })
 
-      // Subtle traveling architectural datum dot across whole scroll
-      tl.fromTo(
-        '.cinematic__travel-dot',
-        { x: -120, y: 80, opacity: 0 },
-        { x: 120, y: -80, opacity: 0.7, duration: tl.duration(), ease: 'none' },
-        0
+          // STATEMENT 04
+          .set('.stmt--4', { autoAlpha: 1 })
+          .fromTo(
+            '.stmt--4 .stmt__line',
+            { y: yDist, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.0, stagger: 0.12, ease: 'power3.out' }
+          )
+          .to({}, { duration: 1.2 })
+          .to(
+            '.stmt--4 .stmt__line',
+            { y: -yDist, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'power3.in' }
+          )
+          .set('.stmt--4', { autoAlpha: 0 })
+          .to({}, { duration: 0.6 })
+
+          // STATEMENT 05
+          .set('.stmt--5', { autoAlpha: 1 })
+          .fromTo(
+            '.stmt--5 .stmt__line',
+            { y: yDist, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.0, stagger: 0.12, ease: 'power3.out' }
+          )
+          .to({}, { duration: 1.2 })
+          .to(
+            '.stmt--5 .stmt__line',
+            { y: -yDist, opacity: 0, duration: 0.8, stagger: 0.06, ease: 'power3.in' }
+          )
+          .set('.stmt--5', { autoAlpha: 0 })
+          .to({}, { duration: 0.6 })
+
+          // STATEMENT 06 (FINAL)
+          .set('.stmt--6', { autoAlpha: 1 })
+          .fromTo(
+            ['.stmt--6 .stmt__main-title', '.stmt--6 .stmt__subtitle'],
+            { y: yDist, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.1, stagger: 0.18, ease: 'power3.out' }
+          )
+          .to({}, { duration: 1.8 });
+
+          // Subtle traveling architectural datum dot across whole scroll
+          tl.fromTo(
+            '.cinematic__travel-dot',
+            { x: -120, y: 80, opacity: 0 },
+            { x: 120, y: -80, opacity: 0.7, duration: tl.duration(), ease: 'none' },
+            0
+          );
+        }
       );
     }, containerRef);
 

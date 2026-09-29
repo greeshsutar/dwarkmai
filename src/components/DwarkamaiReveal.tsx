@@ -21,7 +21,6 @@ const TOTAL_FRAMES = frameUrls.length; // 240
 
 export default function DwarkamaiReveal() {
   const sectionRef = useRef<HTMLElement>(null);
-  const stickyContainerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const loadedImagesRef = useRef<(HTMLImageElement | null)[]>([]);
   const currentFrameRef = useRef<number>(0);
@@ -80,7 +79,7 @@ export default function DwarkamaiReveal() {
       let offsetY: number;
 
       // Scale building so it stands taller and larger in the viewport
-      const scaleFactor = 1.18;
+      const scaleFactor = 1.15;
       if (canvasAspect > imgAspect) {
         renderH = canvas.height * scaleFactor;
         renderW = renderH * imgAspect;
@@ -103,7 +102,7 @@ export default function DwarkamaiReveal() {
     isReducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     loadedImagesRef.current = new Array(TOTAL_FRAMES).fill(null);
 
-    // 1. Prioritize Frame 1
+    // 1. Prioritize Frame 0
     const firstImg = new Image();
     firstImg.src = frameUrls[0];
     firstImg.onload = () => {
@@ -124,7 +123,7 @@ export default function DwarkamaiReveal() {
     }
   }, [renderCanvasFrame]);
 
-  // GSAP ScrollTrigger setup — Natural unpinned scroll (pin: false) with smooth scrubbing
+  // GSAP ScrollTrigger setup with responsive matchMedia and pinned scroll scrubbing
   useEffect(() => {
     if (!sectionRef.current) return;
 
@@ -134,27 +133,49 @@ export default function DwarkamaiReveal() {
     }
 
     const ctx = gsap.context(() => {
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 0.1, // Smooth responsive scrub (between 0.08 and 0.15)
-        pin: false, // NO PINNING — natural continuous scroll
-        onUpdate: (self) => {
-          const rawIndex = self.progress * (TOTAL_FRAMES - 1);
-          const targetIndex = Math.min(
-            TOTAL_FRAMES - 1,
-            Math.max(0, Math.round(rawIndex))
-          );
+      const mm = gsap.matchMedia();
 
-          if (targetIndex !== currentFrameRef.current) {
-            currentFrameRef.current = targetIndex;
-            requestAnimationFrame(() => {
-              renderCanvasFrame(targetIndex);
-            });
-          }
+      mm.add(
+        {
+          isDesktop: '(min-width: 1025px)',
+          isTablet: '(min-width: 769px) and (max-width: 1024px)',
+          isMobile: '(max-width: 768px)',
         },
-      });
+        (context) => {
+          const { isMobile, isTablet } = context.conditions as {
+            isDesktop: boolean;
+            isTablet: boolean;
+            isMobile: boolean;
+          };
+
+          const scrollDistance = isMobile ? '+=120%' : isTablet ? '+=150%' : '+=180%';
+          const scrubSpeed = isMobile ? 0.3 : 0.5;
+
+          ScrollTrigger.create({
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: scrollDistance,
+            pin: true,
+            scrub: scrubSpeed,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              const rawIndex = self.progress * (TOTAL_FRAMES - 1);
+              const targetIndex = Math.min(
+                TOTAL_FRAMES - 1,
+                Math.max(0, Math.round(rawIndex))
+              );
+
+              if (targetIndex !== currentFrameRef.current) {
+                currentFrameRef.current = targetIndex;
+                requestAnimationFrame(() => {
+                  renderCanvasFrame(targetIndex);
+                });
+              }
+            },
+          });
+        }
+      );
     }, sectionRef);
 
     const handleResize = () => {
@@ -175,8 +196,7 @@ export default function DwarkamaiReveal() {
       id="reveal"
       aria-label="Dwarkamai Architectural Editorial Presentation"
     >
-      {/* Sticky container provides smooth in-view presentation during natural 200vh document scroll */}
-      <div className="reveal-canvas-sticky" ref={stickyContainerRef}>
+      <div className="reveal-canvas-inner">
         <div className="reveal-canvas-grid">
           {/* ── LEFT 50%: MASSIVE ARCHITECTURAL ARTWORK (NO CARD, NO BOX, SEAMLESS CANVAS) ── */}
           <div className="reveal-canvas-left">

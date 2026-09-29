@@ -60,30 +60,29 @@ export default function Experience() {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
-    const isMobile = window.innerWidth <= 860;
-    if (isMobile) return;
-
     const ctx = gsap.context(() => {
-      const track = trackRef.current;
-      const section = sectionRef.current;
-      if (!track || !section) return;
+      const mm = gsap.matchMedia();
 
-      const getScrollAmount = () => {
-        return -(track.scrollWidth - window.innerWidth);
-      };
+      mm.add('(min-width: 861px)', () => {
+        const track = trackRef.current;
+        const section = sectionRef.current;
+        if (!track || !section) return;
 
-      gsap.to(track, {
-        x: getScrollAmount,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: () => `+=${track.scrollWidth - window.innerWidth}`,
-          pin: true,
-          scrub: 0.1,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
-        },
+        const getScrollAmount = () => -(track.scrollWidth - window.innerWidth);
+
+        gsap.to(track, {
+          x: getScrollAmount,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top top',
+            end: () => `+=${track.scrollWidth - window.innerWidth}`,
+            pin: true,
+            scrub: 0.1,
+            invalidateOnRefresh: true,
+            anticipatePin: 1,
+          },
+        });
       });
     }, sectionRef);
 

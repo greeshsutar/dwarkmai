@@ -2,6 +2,7 @@
    SECTION 04 — EXPERIENCE
    Horizontal Scrolling Editorial Sequence (GSAP ScrollTrigger Pinned)
    Continuous #F3EFE7 Background · 3:4 Lifestyle Imagery
+   Responsive Production Pass — No Overflow
    ═══════════════════════════════════════════════════════════ */
 
 .experience {
@@ -9,10 +10,11 @@
   background-color: var(--bg);
   border-top: var(--border-architectural);
   box-sizing: border-box;
-  padding-top: clamp(2rem, 3.5vh, 3rem);
-  padding-bottom: clamp(2rem, 3.5vh, 3rem);
+  padding-top: clamp(2.5rem, 4.5vh, 4rem);
+  padding-bottom: clamp(2.5rem, 4.5vh, 4rem);
   overflow: hidden;
   width: 100%;
+  max-width: 100%;
 }
 
 /* ── SECTION HEADER ────────────────────────────────────── */
@@ -20,7 +22,7 @@
   display: grid;
   grid-template-columns: 140px 1fr;
   gap: var(--space-md);
-  margin-bottom: clamp(1rem, 2vh, 1.75rem);
+  margin-bottom: clamp(1.5rem, 3vh, 2.5rem);
 }
 
 .experience__header-label {
@@ -40,8 +42,8 @@
 
 .experience__title {
   color: var(--text-primary);
-  margin-bottom: 4px;
-  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+  margin-bottom: 6px;
+  font-size: clamp(1.8rem, 3.2vw, 3rem);
   line-height: 0.95;
 }
 
@@ -51,39 +53,39 @@
   font-family: var(--font-editorial);
   font-style: italic;
   font-weight: 300;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 /* ── HORIZONTAL VIEWPORT & TRACK ───────────────────────── */
 .experience__viewport {
   position: relative;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
-  margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  padding: 4px 0 8px;
+  padding: 4px 0 12px;
+  box-sizing: border-box;
 }
 
 .experience__track {
   display: flex;
   gap: clamp(1.5rem, 2.5vw, 2.75rem);
   width: max-content;
-  padding-left: clamp(2rem, 6vw, 6rem);
-  padding-right: clamp(2rem, 6vw, 6rem);
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
   will-change: transform;
+  box-sizing: border-box;
 }
 
 /* ── EDITORIAL CARD PANELS ──────────────────────────────── */
 .experience__card {
-  width: clamp(300px, 28vw, 390px);
-  height: clamp(490px, 74vh, 630px);
+  width: clamp(290px, 27vw, 380px);
+  height: clamp(480px, 72vh, 600px);
   background-color: var(--bg);
   border: var(--border-architectural);
-  padding: clamp(1rem, 1.4vw, 1.5rem);
+  padding: clamp(1rem, 1.3vw, 1.4rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: clamp(0.4rem, 0.9vh, 0.75rem);
+  gap: clamp(0.4rem, 0.8vh, 0.75rem);
   box-sizing: border-box;
   flex-shrink: 0;
   transition: border-color var(--duration-fast) var(--ease-out);
@@ -141,9 +143,9 @@
 
 .experience__card-title {
   font-family: var(--font-editorial);
-  font-size: clamp(1.4rem, 1.85vw, 1.95rem);
+  font-size: clamp(1.35rem, 1.8vw, 1.9rem);
   font-weight: 300;
-  line-height: 0.95;
+  line-height: 0.96;
   letter-spacing: -0.02em;
   color: #171613;
   text-transform: uppercase;
@@ -178,7 +180,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 3 / 4;
-  max-height: clamp(230px, 35vh, 310px);
+  max-height: clamp(220px, 34vh, 300px);
   overflow: hidden;
   border: var(--border-architectural);
   background: transparent;
@@ -193,31 +195,25 @@
   object-fit: cover;
   object-position: center;
   display: block;
-  transform: scale(1);
 }
 
-/* ── RESPONSIVE ─────────────────────────────────────────── */
+/* ── RESPONSIVE ADAPTATIONS ─────────────────────────────── */
 @media (max-width: 1024px) {
-  .experience {
-    min-height: auto;
-  }
-
   .experience__header {
     grid-template-columns: 120px 1fr;
     gap: var(--space-sm);
   }
 
   .experience__card {
-    width: clamp(300px, 42vw, 380px);
-    height: clamp(480px, 70vh, 580px);
+    width: clamp(280px, 40vw, 360px);
+    height: clamp(460px, 68vh, 560px);
   }
 }
 
 @media (max-width: 860px) {
   .experience {
-    min-height: auto;
-    padding-top: var(--space-2xl);
-    padding-bottom: var(--space-2xl);
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
   }
 
   .experience__header {
@@ -238,17 +234,17 @@
 
   .experience__viewport {
     width: 100%;
-    margin: 0;
-    padding: 0;
     overflow: visible;
+    padding: 0;
   }
 
   .experience__track {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: var(--space-lg);
-    padding: 0;
+    gap: var(--space-md);
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
     transform: none !important;
   }
 
@@ -256,11 +252,13 @@
     width: 100%;
     height: auto;
     min-height: auto;
-    padding: 1.5rem;
+    padding: clamp(1.2rem, 3vw, 1.6rem);
+    gap: 1rem;
   }
 
   .experience__image-box {
     max-height: none;
+    aspect-ratio: 4 / 3;
   }
 }
 
@@ -269,6 +267,3 @@
     transform: none !important;
   }
 }
-
-
-

@@ -1,6 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
    SECTION 06 — ARCHITECTURE & FACADE DETAIL
    Continuous Editorial Design on #F3EFE7
+   Responsive Production Pass — No Overflow
    ═══════════════════════════════════════════════════════════ */
 
 .architecture {
@@ -12,7 +13,7 @@
   display: grid;
   grid-template-columns: 160px 1fr;
   gap: var(--space-lg);
-  margin-bottom: var(--space-xl);
+  margin-bottom: clamp(2rem, 4vh, 3.5rem);
 }
 
 .architecture__label {
@@ -29,7 +30,7 @@
 .architecture__title {
   color: var(--text-primary);
   font-family: var(--font-editorial);
-  font-size: clamp(2.4rem, 4.5vw, 4.5rem);
+  font-size: clamp(2.2rem, 4.2vw, 4.2rem);
   font-weight: 300;
   line-height: 0.96;
   letter-spacing: -0.02em;
@@ -41,7 +42,7 @@
 
 /* Visual area */
 .architecture__visual {
-  margin-bottom: var(--space-xl);
+  margin-bottom: clamp(2rem, 4vh, 3.5rem);
 }
 
 .architecture__image-area {
@@ -70,7 +71,7 @@
 .architecture__desc-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
+  gap: clamp(1.5rem, 3vw, 3rem);
 }
 
 .architecture__desc-item {
@@ -84,7 +85,7 @@
   max-width: 360px;
 }
 
-/* ── RESPONSIVE ─────────────────────────────────────────── */
+/* ── RESPONSIVE MEDIA QUERIES ───────────────────────────── */
 @media (max-width: 1024px) {
   .architecture__header {
     grid-template-columns: 120px 1fr;
@@ -100,16 +101,30 @@
 @media (max-width: 768px) {
   .architecture__header {
     grid-template-columns: 1fr;
-    gap: var(--space-md);
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
   }
 
   .architecture__label {
     flex-direction: row;
     align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .architecture__divider {
+    width: 24px;
+  }
+
+  .architecture__title {
+    font-size: clamp(2rem, 8vw, 2.8rem);
   }
 
   .architecture__desc-grid {
     grid-template-columns: 1fr;
     gap: var(--space-md);
+  }
+
+  .architecture__desc-item .text-body {
+    max-width: 100%;
   }
 }

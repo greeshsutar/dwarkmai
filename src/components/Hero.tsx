@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import DarpanLogo from './DarpanLogo';
 import './Hero.css';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -22,6 +23,7 @@ export default function Hero() {
   const heroRef = useRef<HTMLElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const brandIntroRef = useRef<HTMLDivElement>(null);
   const loadedImagesRef = useRef<(HTMLImageElement | null)[]>([]);
   const currentFrameRef = useRef<number>(0);
   const [isFirstFrameLoaded, setIsFirstFrameLoaded] = useState(false);
@@ -131,7 +133,7 @@ export default function Hero() {
     }
   }, [renderCanvasFrame]);
 
-  // Scroll-controlled GSAP Timeline with smooth scrubbing
+  // Orchestrated Timeline: Automatic Brand Signature on Load + Scroll-driven Building Reveal
   useEffect(() => {
     if (!heroRef.current || !stageRef.current) return;
 
@@ -142,60 +144,153 @@ export default function Hero() {
     }
 
     const ctx = gsap.context(() => {
-      // 1. Initial UI entrance timeline (Only minimal top micro metadata & scroll indicator)
-      const enterTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      // ══════════════════════════════════════════════════════════════
+      // 1. AUTOMATIC TIME-BASED ENTRANCE ANIMATION (0.0s – 2.4s)
+      // Architectural Datum draws → Darpan Logo emerges → Text reveals → EVERYTHING STAYS VISIBLE
+      // ══════════════════════════════════════════════════════════════
+      const entranceTl = gsap.timeline({ defaults: { ease: 'power2.out' } });
 
-      enterTl
+      if (brandIntroRef.current) {
+        gsap.set(brandIntroRef.current, { opacity: 1, pointerEvents: 'none' });
+      }
+
+      gsap.set('.hero__brand-datum', { scaleX: 0, opacity: 0 });
+      gsap.set('.hero__brand-datum .hero__datum-point', { scale: 0, opacity: 0 });
+      gsap.set('.hero__brand-mark-wrap', { opacity: 0, y: 12 });
+      gsap.set('.hero__brand-title', { opacity: 0, y: 10 });
+      gsap.set('.hero__brand-quote', { opacity: 0, y: 10 });
+      gsap.set('.hero__brand-geo', { opacity: 0, y: 8 });
+      gsap.set('.hero__scroll-indicator', { opacity: 0, y: 8 });
+
+      entranceTl
+        // 0.0s – 0.6s: Technical frame and top coordinate bar materialize
         .fromTo(
           '.hero__tech-frame',
           { opacity: 0 },
-          { opacity: 1, duration: 1.2, delay: 0.1 }
+          { opacity: 1, duration: 0.8, delay: 0.1 },
+          0
         )
         .fromTo(
-          ['.hero__meta-top', '.hero__scroll-indicator'],
-          { opacity: 0, y: 15 },
-          { opacity: 1, y: 0, duration: 0.9, stagger: 0.1 },
-          '-=0.8'
+          '.hero__meta-top',
+          { opacity: 0, y: -6 },
+          { opacity: 1, y: 0, duration: 0.6 },
+          0.2
+        )
+        // 0.5s – 1.0s: Thin architectural datum line draws through the center
+        .to(
+          '.hero__brand-datum',
+          { opacity: 1, scaleX: 1, duration: 0.55, ease: 'power2.inOut' },
+          0.5
+        )
+        // 0.8s – 1.2s: Tiny orange registration point appears
+        .to(
+          '.hero__brand-datum .hero__datum-point',
+          { opacity: 1, scale: 1, duration: 0.35, ease: 'back.out(2)' },
+          0.8
+        )
+        // 0.9s – 1.6s: Actual Darpan architectural logo reveals
+        .to(
+          '.hero__brand-mark-wrap',
+          { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out' },
+          0.9
+        )
+        // 1.4s – 2.0s: "DARPAN CONSTRUCTIONS" appears
+        .to(
+          '.hero__brand-title',
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+          1.4
+        )
+        // 1.8s – 2.4s: Editorial quote "BUILDING WITH INTENTION.", location, & scroll indicator reveal
+        .to(
+          '.hero__brand-quote',
+          { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' },
+          1.8
+        )
+        .to(
+          '.hero__brand-geo',
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+          2.0
+        )
+        .to(
+          '.hero__scroll-indicator',
+          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' },
+          2.2
         );
+        // NOTE: No exit animation! Everything stays permanently visible until user scrolls.
 
-      // 2. Scroll-controlled animation pinning timeline
-      // Pinned during progress, releases cleanly at 100%
-      ScrollTrigger.create({
-        trigger: heroRef.current,
-        start: 'top top',
-        end: '+=160%',
-        pin: true,
-        scrub: 0.6, // Smooth responsive scrubbing
-        anticipatePin: 1,
-        onUpdate: (self) => {
-          const rawIndex = self.progress * (TOTAL_FRAMES - 1);
-          const targetIndex = Math.min(
-            TOTAL_FRAMES - 1,
-            Math.max(0, Math.round(rawIndex))
-          );
+      // ══════════════════════════════════════════════════════════════
+      // 2. SCROLL-DRIVEN TRANSITION: DARPAN → BUILDING CONSTRUCTION
+      // ══════════════════════════════════════════════════════════════
+      const mm = gsap.matchMedia();
 
-          if (targetIndex !== currentFrameRef.current) {
-            currentFrameRef.current = targetIndex;
-            requestAnimationFrame(() => {
-              renderCanvasFrame(targetIndex);
-            });
-          }
-
-          // Subtle opacity shift of scroll indicator as user starts scrolling
-          if (self.progress > 0.08) {
-            gsap.to('.hero__scroll-indicator', { opacity: 0, duration: 0.25, overwrite: 'auto' });
-          } else {
-            gsap.to('.hero__scroll-indicator', { opacity: 1, duration: 0.35, overwrite: 'auto' });
-          }
-
-          // Reveal completed brand identity ONLY at the final completed frame (progress > 0.88)
-          if (self.progress > 0.88) {
-            gsap.to('.hero__bottom-brand', { opacity: 1, y: 0, duration: 0.45, overwrite: 'auto' });
-          } else {
-            gsap.to('.hero__bottom-brand', { opacity: 0, y: 15, duration: 0.3, overwrite: 'auto' });
-          }
+      mm.add(
+        {
+          isDesktop: '(min-width: 1025px)',
+          isTablet: '(min-width: 769px) and (max-width: 1024px)',
+          isMobile: '(max-width: 768px)',
         },
-      });
+        (context) => {
+          const { isMobile, isTablet } = context.conditions as {
+            isDesktop: boolean;
+            isTablet: boolean;
+            isMobile: boolean;
+          };
+
+          const scrollDistance = isMobile ? '+=180%' : isTablet ? '+=230%' : '+=290%';
+          const scrubSpeed = isMobile ? 0.8 : 1.1;
+          const frameState = { frame: 0 };
+
+          const masterTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: 'top top',
+              end: scrollDistance,
+              pin: true,
+              scrub: scrubSpeed,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          // 0.00 → 0.15: Darpan composition lifts upward and exits as ONE cohesive group
+          if (brandIntroRef.current) {
+            masterTl.to(
+              brandIntroRef.current,
+              {
+                y: -90,
+                opacity: 0,
+                duration: 0.15,
+                ease: 'power2.inOut',
+              },
+              0.00
+            );
+          }
+
+          // 0.00 → 1.00: Direct architectural building construction reveal scrubs smoothly
+          masterTl.to(
+            frameState,
+            {
+              frame: TOTAL_FRAMES - 1,
+              ease: 'none',
+              duration: 1.0,
+              onUpdate: () => {
+                const targetIndex = Math.min(
+                  TOTAL_FRAMES - 1,
+                  Math.max(0, Math.round(frameState.frame))
+                );
+
+                if (targetIndex !== currentFrameRef.current) {
+                  currentFrameRef.current = targetIndex;
+                  requestAnimationFrame(() => {
+                    renderCanvasFrame(targetIndex);
+                  });
+                }
+              },
+            },
+            0.00
+          );
+        }
+      );
     }, heroRef);
 
     const handleResize = () => {
@@ -210,7 +305,7 @@ export default function Hero() {
   }, [renderCanvasFrame]);
 
   return (
-    <section className="hero" id="hero" ref={heroRef} aria-label="Dwarkamai Architectural Presentation">
+    <section className="hero" id="hero" ref={heroRef} aria-label="Darpan Constructions — Dwarkamai Presentation">
       {/* ── STAGE VIEWPORT (PINNED FULLSCREEN) ────────────────── */}
       <div className="hero__stage" ref={stageRef}>
         {/* ── ARCHITECTURAL ANIMATION CANVAS ─────────────────── */}
@@ -219,6 +314,41 @@ export default function Hero() {
           className="hero__canvas"
           aria-label="Dwarkamai architectural drawing to construction illustration scroll reveal"
         />
+
+        {/* ── 1. PERMANENT CENTRAL IDENTITY: DARPAN CONSTRUCTIONS ── */}
+        <div className="hero__brand-intro" ref={brandIntroRef} aria-label="Darpan Constructions">
+          <div className="hero__brand-inner">
+            {/* Thin architectural datum line */}
+            <div className="hero__brand-datum" aria-hidden="true">
+              <span className="hero__datum-line left" />
+              <span className="hero__datum-point" />
+              <span className="hero__datum-line right" />
+            </div>
+
+            {/* Actual Darpan Architectural Logo Mark */}
+            <div className="hero__brand-mark-wrap">
+              <DarpanLogo variant="mark" color="#171613" className="hero__brand-mark" />
+            </div>
+
+            {/* Brand Title */}
+            <h1 className="hero__brand-title">DARPAN CONSTRUCTIONS</h1>
+
+            {/* Editorial Quote */}
+            <p className="hero__brand-quote font-editorial">BUILDING WITH INTENTION.</p>
+
+            {/* Location Tag */}
+            <p className="hero__brand-geo arch-label">SAWANTWADI &nbsp;·&nbsp; SINDHUDURG</p>
+
+            {/* Integrated Central Scroll Indicator */}
+            <div className="hero__scroll-indicator" aria-label="Scroll to explore">
+              <span className="hero__scroll-text arch-label">SCROLL TO EXPLORE</span>
+              <div className="hero__scroll-arrow-wrap" aria-hidden="true">
+                <span className="hero__scroll-stem" />
+                <span className="hero__scroll-arrow">↓</span>
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* ── TECHNICAL ARCHITECTURAL FRAME OVERLAY ───────────── */}
         <div className="hero__tech-frame" aria-hidden="true">
@@ -246,7 +376,7 @@ export default function Hero() {
           <div className="hero__meta-item">
             <span className="hero__meta-num">01</span>
             <span className="hero__meta-sep">/</span>
-            <span className="arch-label">DWARKAMAI</span>
+            <span className="arch-label">DARPAN CONSTRUCTIONS</span>
           </div>
           <div className="hero__meta-item hero__meta-coord">
             <span className="arch-label">15°53′48″ N &nbsp; 73°49′14″ E · FRONT ELEVATION</span>
@@ -256,35 +386,18 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── BOTTOM-LEFT EDITORIAL BRAND IDENTITY ────────────── */}
-        <div className="hero__bottom-brand">
-          <h1 className="hero__brand-title font-editorial">DWARKAMAI</h1>
-          <div className="hero__brand-sub-wrap">
-            <p className="hero__brand-loc arch-label">SAWANTWADI · SINDHUDURG</p>
-            <p className="hero__brand-tagline arch-label">A HOME ABOVE THE ORDINARY</p>
-          </div>
-        </div>
-
-        {/* ── BOTTOM-RIGHT / CENTER SCROLL INDICATOR ─────────── */}
-        <div className="hero__scroll-indicator">
-          <span className="hero__scroll-text arch-label">SCROLL TO EXPLORE</span>
-          <div className="hero__scroll-line-track">
-            <span className="hero__scroll-line-bar" />
-          </div>
-        </div>
-
         {/* ── MINIMAL ARCHITECTURAL LOADING STATE ────────────── */}
         {!isFirstFrameLoaded && (
           <div className="hero__loading" aria-live="polite">
             <div className="hero__loading-inner">
-              <span className="hero__loading-title font-editorial">DWARKAMAI</span>
+              <span className="hero__loading-title font-editorial">DARPAN</span>
               <div className="hero__loading-bar-wrap">
                 <div
                   className="hero__loading-bar"
                   style={{ width: `${Math.max(15, loadProgress)}%` }}
                 />
               </div>
-              <span className="hero__loading-label arch-label">01 / ARCHITECTURAL CANVAS</span>
+              <span className="hero__loading-label arch-label">DARPAN CONSTRUCTIONS // DWARKAMAI</span>
             </div>
           </div>
         )}

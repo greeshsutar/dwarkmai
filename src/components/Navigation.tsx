@@ -19,15 +19,36 @@ export default function Navigation() {
     } else {
       document.body.style.overflow = '';
     }
-    return () => { document.body.style.overflow = ''; };
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileOpen]);
+
+  // Keyboard accessibility: Close mobile menu on Escape
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMobileOpen) {
+        setIsMobileOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isMobileOpen]);
 
   return (
     <>
-      <nav className={`nav ${isScrolled ? 'nav--scrolled' : ''}`} id="navigation">
+      <nav
+        className={`nav ${isScrolled ? 'nav--scrolled' : ''} ${isMobileOpen ? 'nav--menu-open' : ''}`}
+        id="navigation"
+        aria-label="Main Navigation"
+      >
         <div className="nav__inner">
-          <a href="#" className="nav__brand" aria-label="Darpan Constructions">
-            <DarpanLogo className="nav__logo" style={{ height: '44px', width: 'auto' }} />
+          <a href="#" className="nav__brand" aria-label="Darpan Constructions — Dwarkamai Home">
+            <DarpanLogo className="nav__logo" style={{ height: '40px', width: 'auto' }} />
+            <div className="nav__brand-text">
+              <span className="nav__brand-title font-editorial">DWARKAMAI</span>
+              <span className="nav__brand-sub">DARPAN</span>
+            </div>
           </a>
 
           <div className="nav__links">
@@ -38,30 +59,44 @@ export default function Navigation() {
             ))}
           </div>
 
-          <a href="#enquiry" className="nav__cta">
-            ENQUIRE <span className="arrow">&rarr;</span>
-          </a>
+          <div className="nav__actions">
+            <a href="#enquiry" className="nav__cta">
+              ENQUIRE <span className="arrow">&rarr;</span>
+            </a>
 
-          <button
-            className={`nav__burger ${isMobileOpen ? 'nav__burger--active' : ''}`}
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={isMobileOpen}
-          >
-            <span></span>
-            <span></span>
-          </button>
+            <button
+              className={`nav__burger ${isMobileOpen ? 'nav__burger--active' : ''}`}
+              onClick={() => setIsMobileOpen(!isMobileOpen)}
+              aria-label={isMobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isMobileOpen}
+              aria-controls="mobile-menu-overlay"
+            >
+              <span className="nav__burger-line"></span>
+              <span className="nav__burger-line"></span>
+            </button>
+          </div>
         </div>
       </nav>
 
       {/* Mobile Menu Overlay */}
-      <div className={`mobile-menu ${isMobileOpen ? 'mobile-menu--open' : ''}`}>
+      <div
+        id="mobile-menu-overlay"
+        className={`mobile-menu ${isMobileOpen ? 'mobile-menu--open' : ''}`}
+        aria-hidden={!isMobileOpen}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile Navigation Menu"
+      >
         <div className="mobile-menu__content">
           <div className="mobile-menu__header">
-            <DarpanLogo style={{ height: '48px', width: 'auto' }} />
+            <DarpanLogo style={{ height: '42px', width: 'auto' }} />
+            <div className="mobile-menu__brand-meta">
+              <span className="mobile-menu__project-name font-editorial">DWARKAMAI</span>
+              <span className="mobile-menu__project-loc arch-label">SAWANTWADI · SINDHUDURG</span>
+            </div>
           </div>
 
-          <div className="mobile-menu__links">
+          <nav className="mobile-menu__links" aria-label="Mobile links">
             {PROJECT.nav.map((item) => (
               <a
                 key={item.number}
@@ -69,26 +104,31 @@ export default function Navigation() {
                 className="mobile-menu__link"
                 onClick={() => setIsMobileOpen(false)}
               >
+                <span className="mobile-menu__link-num">{item.number}</span>
                 <span className="mobile-menu__link-label">{item.label}</span>
+                <span className="mobile-menu__link-arrow" aria-hidden="true">&rarr;</span>
               </a>
             ))}
-          </div>
+          </nav>
 
           <div className="mobile-menu__footer">
             <a
               href="#enquiry"
-              className="btn-primary"
+              className="btn-primary mobile-menu__cta-btn"
               onClick={() => setIsMobileOpen(false)}
             >
               ENQUIRE NOW <span className="arrow">&rarr;</span>
             </a>
 
             <div className="mobile-menu__contact">
-              {PROJECT.contact.phones.map((phone) => (
-                <a key={phone} href={`tel:${phone}`} className="mobile-menu__phone">
-                  {phone}
-                </a>
-              ))}
+              <span className="arch-label mobile-menu__contact-title">DIRECT INQUIRIES</span>
+              <div className="mobile-menu__phones">
+                {PROJECT.contact.phones.map((phone) => (
+                  <a key={phone} href={`tel:${phone}`} className="mobile-menu__phone font-editorial">
+                    {phone}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
