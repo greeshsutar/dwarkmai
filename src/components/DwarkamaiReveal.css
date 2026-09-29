@@ -1,0 +1,283 @@
+/* ═══════════════════════════════════════════════════════════
+   DWARKAMAI ARCHITECTURAL EDITORIAL SCROLL REVEAL
+   Continuous #F3EFE7 Canvas Composition (50/50 Viewport Split)
+   Natural Unpinned Scroll · 220vh Document Flow
+   ═══════════════════════════════════════════════════════════ */
+
+.reveal-canvas-section {
+  position: relative;
+  width: 100%;
+  height: 220vh;
+  background-color: var(--bg);
+  box-sizing: border-box;
+}
+
+.reveal-canvas-sticky {
+  position: sticky;
+  top: 0;
+  width: 100vw;
+  height: 100svh;
+  min-height: 640px;
+  overflow: hidden;
+  background-color: var(--bg);
+  box-sizing: border-box;
+}
+
+.reveal-canvas-grid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  border-top: 1px solid rgba(23, 22, 19, 0.12);
+  border-bottom: 1px solid rgba(23, 22, 19, 0.12);
+  box-sizing: border-box;
+}
+
+/* ── LEFT: 50vw MASSIVE ARCHITECTURAL ARTWORK (NO CARD, NO BOX) ── */
+.reveal-canvas-left {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: transparent;
+}
+
+.reveal-building-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  background: transparent;
+}
+
+/* ── CENTER VERTICAL ARCHITECTURAL DIVIDER ─────────────────── */
+.reveal-canvas-divider {
+  width: 1px;
+  height: 100%;
+  background: rgba(23, 22, 19, 0.12);
+}
+
+/* ── RIGHT: 50vw STABLE EDITORIAL COMPOSITION ──────────────── */
+.reveal-canvas-right {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(2.5rem, 5vh, 4.5rem) clamp(2rem, 4.5vw, 5rem) 0;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.reveal-editorial-inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vh, 2.5rem);
+  max-width: 580px;
+}
+
+/* Header Section Indicator */
+.reveal-editorial-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.reveal-header-line {
+  width: 48px;
+  height: 1px;
+  background: rgba(23, 22, 19, 0.2);
+}
+
+/* Main Typography Block */
+.reveal-editorial-main {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 1.5vh, 1.25rem);
+}
+
+.reveal-editorial-title {
+  font-family: var(--font-editorial);
+  font-size: clamp(3.2rem, 6.5vw, 6.25rem);
+  font-weight: 300;
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  color: #171613;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+}
+
+.reveal-editorial-tagline {
+  font-family: var(--font-editorial);
+  font-size: clamp(1.2rem, 2vw, 1.75rem);
+  font-weight: 300;
+  font-style: italic;
+  color: #24231F;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.reveal-editorial-body {
+  font-family: var(--font-primary);
+  font-size: clamp(0.875rem, 1vw, 1rem);
+  line-height: 1.65;
+  color: #55524B;
+  max-width: 460px;
+  margin: 0;
+}
+
+/* Architectural CTA */
+.reveal-editorial-cta-wrap {
+  padding-top: var(--space-xs);
+}
+
+.reveal-editorial-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  border: 1px solid rgba(23, 22, 19, 0.25);
+  font-family: var(--font-primary);
+  font-size: var(--fs-micro);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #171613;
+  background: transparent;
+  transition: all var(--duration-fast) var(--ease-out);
+  width: fit-content;
+}
+
+.reveal-editorial-cta:hover {
+  background: #171613;
+  color: #F3EFE7;
+  border-color: #171613;
+}
+
+.reveal-cta-arrow {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.reveal-editorial-cta:hover .reveal-cta-arrow {
+  transform: translateX(4px);
+}
+
+/* ── BOTTOM METADATA GRID BAR ────────────────────────────── */
+.reveal-bottom-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(23, 22, 19, 0.12);
+  margin-left: calc(-1 * clamp(2rem, 4.5vw, 5rem));
+  margin-right: calc(-1 * clamp(2rem, 4.5vw, 5rem));
+  box-sizing: border-box;
+}
+
+.reveal-grid-cell {
+  padding: 14px 18px;
+  border-right: 1px solid rgba(23, 22, 19, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+}
+
+.reveal-grid-cell:last-child {
+  border-right: none;
+}
+
+.reveal-cell-label {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-family: var(--font-primary);
+}
+
+.reveal-cell-val {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  font-family: var(--font-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .reveal-canvas-right {
+    padding: clamp(1.5rem, 3vh, 3rem) clamp(1.5rem, 3vw, 3rem) 0;
+  }
+
+  .reveal-bottom-grid {
+    margin-left: calc(-1 * clamp(1.5rem, 3vw, 3rem));
+    margin-right: calc(-1 * clamp(1.5rem, 3vw, 3rem));
+  }
+
+  .reveal-grid-cell {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 860px) {
+  .reveal-canvas-section {
+    height: auto;
+  }
+
+  .reveal-canvas-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  .reveal-canvas-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .reveal-canvas-divider {
+    display: none;
+  }
+
+  .reveal-canvas-left {
+    height: 52vh;
+    min-height: 320px;
+    border-bottom: 1px solid rgba(23, 22, 19, 0.12);
+  }
+
+  .reveal-canvas-right {
+    padding: 2rem 1.25rem 0;
+  }
+
+  .reveal-bottom-grid {
+    grid-template-columns: 1fr 1fr;
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .reveal-grid-cell:nth-child(2) {
+    border-right: none;
+  }
+
+  .reveal-grid-cell:nth-child(3) {
+    border-top: 1px solid rgba(23, 22, 19, 0.12);
+  }
+
+  .reveal-grid-cell:nth-child(4) {
+    border-top: 1px solid rgba(23, 22, 19, 0.12);
+    border-right: none;
+  }
+}

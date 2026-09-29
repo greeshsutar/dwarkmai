@@ -1,0 +1,351 @@
+/* ═══════════════════════════════════════════════════════════
+   SECTION 09 — DARPAN CONSTRUCTION
+   Premium Architectural Developer & Brand Banner
+   Deep Charcoal #171613 with Center Masked Architecture
+   ═══════════════════════════════════════════════════════════ */
+
+.developer {
+  background-color: #171613;
+  color: #F3EFE7;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(243, 239, 231, 0.1);
+  border-bottom: 1px solid rgba(243, 239, 231, 0.1);
+  box-sizing: border-box;
+}
+
+/* ── COMPACT HORIZONTAL EDITORIAL BANNER ───────────────── */
+.developer__banner {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  min-height: 440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 34% 42% 24%;
+  align-items: center;
+  padding: clamp(2.5rem, 4.5vh, 3.8rem) clamp(1.5rem, 3.5vw, 4rem);
+  box-sizing: border-box;
+}
+
+/* Decorative Left Guideline */
+.developer__left-guide {
+  position: absolute;
+  left: clamp(1.2rem, 2.5vw, 2.8rem);
+  top: 15%;
+  bottom: 15%;
+  width: 1px;
+  background: rgba(243, 239, 231, 0.12);
+  pointer-events: none;
+}
+
+/* ══════════════════════════════════════════════════════════
+   LEFT: EDITORIAL STATEMENT PANE
+   ══════════════════════════════════════════════════════════ */
+.developer__editorial-pane {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1.2rem, 2.2vh, 1.8rem);
+  z-index: 3;
+}
+
+.developer__tag {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.developer__tag-num {
+  color: #C5A477;
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.developer__tag-divider {
+  width: 28px;
+  height: 1px;
+  background: rgba(243, 239, 231, 0.25);
+}
+
+.developer__tag-label {
+  color: rgba(243, 239, 231, 0.6);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+}
+
+.developer__heading-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.8rem, 1.6vh, 1.2rem);
+}
+
+.developer__title {
+  font-family: var(--font-editorial);
+  font-size: clamp(2.3rem, 3.6vw, 3.6rem);
+  font-weight: 300;
+  line-height: 1.02;
+  color: #F8F7F3;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.developer__title-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 2px;
+}
+
+.developer__title-inner {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.developer__title-italic {
+  font-style: italic;
+  font-weight: 300;
+  color: #E2D9CB;
+}
+
+.developer__copy {
+  color: rgba(243, 239, 231, 0.72);
+  font-family: var(--font-primary);
+  font-size: clamp(0.8125rem, 0.9vw, 0.875rem);
+  line-height: 1.6;
+  max-width: 360px;
+  margin: 0;
+}
+
+/* Story CTA Button */
+.developer__btn-wrap {
+  margin-top: 0.25rem;
+}
+
+.developer__story-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 22px;
+  border-radius: 999px;
+  background: #A37E5C;
+  color: #171613;
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.developer__story-btn:hover {
+  background: #C5A477;
+  color: #11100E;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+}
+
+.developer__btn-arrow {
+  color: #171613;
+  font-size: 0.875rem;
+  transition: transform 0.3s ease;
+}
+
+.developer__story-btn:hover .developer__btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ══════════════════════════════════════════════════════════
+   CENTER: MASKED ARCHITECTURAL SKETCH + DARPAN LOGO
+   ══════════════════════════════════════════════════════════ */
+.developer__center-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  z-index: 2;
+}
+
+.developer__sketch-wrap {
+  position: absolute;
+  inset: -15% -20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.developer__sketch-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(125%) brightness(0.7);
+  mix-blend-mode: screen;
+  opacity: 0.32;
+  mask-image: radial-gradient(ellipse 60% 65% at 50% 50%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 95%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 65% at 50% 50%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 95%);
+}
+
+.developer__sketch-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(23, 22, 19, 0) 20%, #171613 85%);
+  pointer-events: none;
+}
+
+/* White Darpan Logo in Center */
+.developer__logo-container {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  padding: 1rem;
+}
+
+.developer__logo-glow {
+  position: absolute;
+  width: 220px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, rgba(23, 22, 19, 0) 70%);
+  filter: blur(25px);
+  pointer-events: none;
+}
+
+.developer__white-logo {
+  filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.6));
+}
+
+/* ══════════════════════════════════════════════════════════
+   RIGHT: BRAND VALUES VERTICAL LIST
+   ══════════════════════════════════════════════════════════ */
+.developer__values-pane {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-left: 1.5rem;
+  z-index: 3;
+}
+
+.developer__values-wrapper {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.developer__values-timeline {
+  position: absolute;
+  left: 3px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: rgba(243, 239, 231, 0.18);
+  pointer-events: none;
+}
+
+.developer__values-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2.4vh, 22px);
+  padding-left: 0;
+}
+
+.developer__value-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.developer__value-node {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 7px;
+  height: 7px;
+  z-index: 2;
+}
+
+.developer__value-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #C5A477;
+  display: inline-block;
+  box-shadow: 0 0 8px rgba(197, 164, 119, 0.5);
+}
+
+.developer__value-text {
+  font-family: var(--font-editorial);
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: #F8F7F3;
+  white-space: nowrap;
+}
+
+/* ── RESPONSIVE MEDIA QUERIES ──────────────────────────── */
+@media (max-width: 1100px) {
+  .developer__banner {
+    grid-template-columns: 36% 36% 28%;
+    padding: 3rem 2rem;
+  }
+
+  .developer__left-guide {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .developer__banner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding: 3.5rem 1.5rem;
+  }
+
+  .developer__editorial-pane {
+    align-items: flex-start;
+  }
+
+  .developer__center-stage {
+    min-height: 280px;
+    padding: 1rem 0;
+  }
+
+  .developer__sketch-wrap {
+    inset: -10% -10%;
+  }
+
+  .developer__values-pane {
+    justify-content: flex-start;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .developer__banner {
+    padding: 3rem 1.25rem;
+    gap: 2rem;
+  }
+
+  .developer__title {
+    font-size: 2.2rem;
+  }
+
+  .developer__logo-container {
+    max-width: 260px;
+  }
+
+  .developer__value-text {
+    font-size: 1rem;
+  }
+}

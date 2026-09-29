@@ -1,0 +1,64 @@
+﻿<svg viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Chimney -->
+  <rect x="366" y="138" width="22" height="30" fill="#1b365d" />
+
+  <!-- Double Gable Roof Line -->
+  <path d="M250 82L45 208L56 224L250 102L444 224L455 208L250 82Z" fill="#1b365d" />
+  <path d="M250 114L85 220L93 232L250 130L407 232L415 220L250 114Z" fill="#1b365d" />
+
+  <!-- 4-Pane Attic Window -->
+  <g fill="#7A838E">
+    <rect x="228" y="148" width="18" height="17" rx="1" />
+    <rect x="254" y="148" width="18" height="17" rx="1" />
+    <rect x="228" y="171" width="18" height="17" rx="1" />
+    <rect x="254" y="171" width="18" height="17" rx="1" />
+  </g>
+
+  <!-- DARPAN Letters -->
+  <!-- D -->
+  <path d="M80 204H105C124 204 135 218 135 260C135 302 124 316 105 316H80V204ZM95 219V301H104C115 301 120 290 120 260C120 230 115 219 104 219H95Z" fill="#1b365d" />
+
+  <!-- A (First) -->
+  <path d="M142 316V248C142 218 157 203 178 203C199 203 214 218 214 248V316H199V250C199 228 191 218 178 218C165 218 157 228 157 250V316H142Z" fill="#1b365d" />
+  <g fill="#1b365d">
+    <path d="M162 238C162 230 166 226 174 226V245H162V238Z" />
+    <path d="M182 226C190 226 194 230 194 238V245H182V226Z" />
+    <rect x="162" y="249" width="12" height="19" />
+    <rect x="182" y="249" width="12" height="19" />
+    <rect x="162" y="272" width="12" height="19" />
+    <rect x="182" y="272" width="12" height="19" />
+    <rect x="162" y="295" width="12" height="17" />
+    <rect x="182" y="295" width="12" height="17" />
+  </g>
+
+  <!-- R -->
+  <path d="M222 204H251C266 204 274 214 274 233C274 247 267 256 255 259L276 316H259L240 262H236V316H222V204ZM236 219V249H249C256 249 260 244 260 234C260 224 256 219 249 219H236Z" fill="#1b365d" />
+
+  <!-- P -->
+  <path d="M282 204H311C326 204 335 214 335 235C335 256 326 266 311 266H296V316H282V204ZM296 219V251H309C316 251 321 246 321 235C321 224 316 219 309 219H296Z" fill="#1b365d" />
+
+  <!-- A (Second) -->
+  <path d="M343 316V248C343 218 358 203 379 203C400 203 415 218 415 248V316H400V250C400 228 392 218 379 218C366 218 358 228 358 250V316H343Z" fill="#1b365d" />
+  <g fill="#1b365d">
+    <path d="M363 238C363 230 367 226 375 226V245H363V238Z" />
+    <path d="M383 226C391 226 395 230 395 238V245H383V226Z" />
+    <rect x="363" y="249" width="12" height="19" />
+    <rect x="383" y="249" width="12" height="19" />
+    <rect x="363" y="272" width="12" height="19" />
+    <rect x="383" y="272" width="12" height="19" />
+    <rect x="363" y="295" width="12" height="17" />
+    <rect x="383" y="295" width="12" height="17" />
+  </g>
+
+  <!-- N -->
+  <path d="M423 204H436L463 284V204H477V316H464L437 236V316H423V204Z" fill="#1b365d" />
+
+  <!-- Divider lines -->
+  <line x1="78" y1="326" x2="479" y2="326" stroke="#7A838E" stroke-width="2.5" />
+  <text x="278" y="346" fill="#7A838E" font-size="17.5" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" text-anchor="middle" letter-spacing="0.48em">CONSTRUCTION</text>
+  <line x1="78" y1="357" x2="479" y2="357" stroke="#7A838E" stroke-width="2.5" />
+
+  <!-- Tagline Banner -->
+  <rect x="65" y="367" width="426" height="34" fill="#1b365d" />
+  <text x="278" y="389.5" fill="#FFFFFF" font-size="12.5" font-weight="700" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" text-anchor="middle" letter-spacing="0.12em">MIRROR IMAGE OF YOUR DREAM HOME</text>
+</svg>

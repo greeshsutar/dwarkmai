@@ -1,0 +1,359 @@
+﻿/* ═══════════════════════════════════════════════════════════════════════════
+   HOMEPAGE ARCHITECTURAL HERO PRESENTATION
+   Scroll-Controlled Fullscreen Canvas Sequence on #F3EFE7
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 100vh;
+  padding-top: var(--nav-height);
+  background-color: var(--bg); /* #F3EFE7 */
+  color: var(--text-primary);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.hero__stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--bg);
+}
+
+/* ── ARCHITECTURAL ANIMATION CANVAS ────────────────────────────────────────── */
+.hero__canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 1;
+  background-color: var(--bg);
+}
+
+/* ── TECHNICAL ARCHITECTURAL FRAME OVERLAY ─────────────────────────────────── */
+.hero__tech-frame {
+  position: absolute;
+  inset: clamp(0.75rem, 2vw, 2rem);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.hero__frame-border {
+  position: absolute;
+  background-color: rgba(119, 115, 108, 0.15);
+}
+
+.hero__frame-border.top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.hero__frame-border.bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+.hero__frame-border.left {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+}
+
+.hero__frame-border.right {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 1px;
+}
+
+/* Precision Corner Registration Marks */
+.hero__corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(36, 35, 31, 0.4);
+  border-style: solid;
+}
+
+.hero__corner.top-left {
+  top: -1px;
+  left: -1px;
+  border-width: 1.5px 0 0 1.5px;
+}
+
+.hero__corner.top-right {
+  top: -1px;
+  right: -1px;
+  border-width: 1.5px 1.5px 0 0;
+}
+
+.hero__corner.bottom-left {
+  bottom: -1px;
+  left: -1px;
+  border-width: 0 0 1.5px 1.5px;
+}
+
+.hero__corner.bottom-right {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+/* Central Datum Mark */
+.hero__datum-mark {
+  position: absolute;
+  top: 50%;
+  left: clamp(1rem, 3vw, 2rem);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.6;
+}
+
+.hero__datum-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #FF4A00;
+}
+
+.hero__datum-cross {
+  width: 12px;
+  height: 1px;
+  background-color: rgba(36, 35, 31, 0.3);
+}
+
+/* ── TOP EDITORIAL METADATA BAR ────────────────────────────────────────────── */
+.hero__meta-top {
+  position: absolute;
+  top: clamp(1rem, 2.5vh, 2.2rem);
+  left: clamp(1.8rem, 4vw, 4rem);
+  right: clamp(1.8rem, 4vw, 4rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero__meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hero__meta-num {
+  font-family: var(--font-primary);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #FF4A00;
+}
+
+.hero__meta-sep {
+  font-size: 0.6875rem;
+  color: rgba(36, 35, 31, 0.3);
+}
+
+.hero__meta-coord {
+  display: block;
+}
+
+.hero__meta-scale {
+  display: block;
+}
+
+/* ── BOTTOM-LEFT EDITORIAL BRAND IDENTITY ─────────────────────────────────── */
+.hero__bottom-brand {
+  position: absolute;
+  bottom: clamp(1.8rem, 4vh, 3.6rem);
+  left: clamp(1.8rem, 4vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.hero__brand-title {
+  font-family: var(--font-editorial);
+  font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.hero__brand-sub-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero__brand-loc {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.hero__brand-tagline {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #FF4A00;
+  text-transform: uppercase;
+}
+
+/* ── BOTTOM-RIGHT / CENTER SCROLL INDICATOR ───────────────────────────────── */
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: clamp(1.8rem, 4vh, 3.6rem);
+  right: clamp(1.8rem, 4vw, 4rem);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 4;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.hero__scroll-text {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.hero__scroll-line-track {
+  width: 44px;
+  height: 1px;
+  background-color: rgba(36, 35, 31, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__scroll-line-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #FF4A00;
+  transform: translateX(-100%);
+  animation: heroScrollDrift 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes heroScrollDrift {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ── MINIMAL ARCHITECTURAL LOADING STATE ──────────────────────────────────── */
+.hero__loading {
+  position: absolute;
+  inset: 0;
+  background-color: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: opacity 0.4s ease;
+}
+
+.hero__loading-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero__loading-title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+}
+
+.hero__loading-bar-wrap {
+  width: 140px;
+  height: 1.5px;
+  background-color: rgba(36, 35, 31, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero__loading-bar {
+  height: 100%;
+  background-color: #FF4A00;
+  transition: width 0.2s ease-out;
+}
+
+.hero__loading-label {
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+}
+
+/* ── RESPONSIVE ADAPTATIONS ───────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .hero__meta-coord {
+    display: none;
+  }
+
+  .hero__datum-mark {
+    display: none;
+  }
+
+  .hero__scroll-text {
+    display: none;
+  }
+
+  .hero__scroll-indicator {
+    right: clamp(1.2rem, 3vw, 2rem);
+  }
+
+  .hero__scroll-line-track {
+    width: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero__meta-scale {
+    display: none;
+  }
+
+  .hero__brand-title {
+    font-size: clamp(2rem, 8vw, 2.6rem);
+  }
+
+  .hero__tech-frame {
+    inset: 0.5rem;
+  }
+}

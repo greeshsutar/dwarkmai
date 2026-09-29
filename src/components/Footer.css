@@ -1,0 +1,426 @@
+/* ═══════════════════════════════════════════════════════════
+   FINAL DWARKAMAI ARCHITECTURAL FOOTER
+   Deep Charcoal #171613 with Masked Architectural Sketch
+   ═══════════════════════════════════════════════════════════ */
+
+.footer {
+  position: relative;
+  background-color: #171613;
+  color: #F3EFE7;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: clamp(3.5rem, 7vh, 5.5rem);
+  padding-bottom: clamp(1.8rem, 3.5vh, 2.8rem);
+  overflow: hidden;
+  box-sizing: border-box;
+  border-top: 1px solid rgba(243, 239, 231, 0.16);
+}
+
+.footer__container {
+  position: relative;
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: clamp(2.5rem, 5vh, 4rem);
+  flex: 1;
+  z-index: 2;
+}
+
+/* ── BACKGROUND ARCHITECTURAL MASKED DRAWING ────────────── */
+.footer__bg-sketch-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.footer__bg-sketch {
+  position: absolute;
+  right: -2%;
+  bottom: -4%;
+  width: 58%;
+  height: 92%;
+  object-fit: contain;
+  object-position: bottom right;
+  filter: grayscale(100%) contrast(125%) brightness(0.6);
+  mix-blend-mode: screen;
+  opacity: 0.07;
+  mask-image: radial-gradient(ellipse 65% 70% at 80% 60%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0) 90%),
+              linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 1) 75%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 70% at 80% 60%, rgba(0, 0, 0, 1) 10%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0) 90%),
+                      linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 30%, rgba(0, 0, 0, 1) 75%);
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+
+.footer__bg-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 25% 45%, rgba(23, 22, 19, 0.05) 0%, #171613 85%);
+}
+
+/* ── TOP ARCHITECTURAL DRAWING FRAME ───────────────────── */
+.footer__top-frame {
+  position: relative;
+  width: 100%;
+  padding-bottom: clamp(1rem, 2vh, 1.8rem);
+}
+
+.footer__top-datum {
+  width: 100%;
+  height: 1px;
+  background: rgba(243, 239, 231, 0.14);
+}
+
+.footer__frame-marks {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__mark-tick {
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid rgba(243, 239, 231, 0.4);
+  border-left: 1px solid rgba(243, 239, 231, 0.4);
+}
+
+.footer__mark-tick.right {
+  border-left: none;
+  border-right: 1px solid rgba(243, 239, 231, 0.4);
+}
+
+.footer__mark-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #FF4A00;
+}
+
+/* ── MAIN EDITORIAL LAYOUT (52% LEFT / 48% RIGHT) ──────── */
+.footer__layout {
+  display: grid;
+  grid-template-columns: 52% 48%;
+  gap: clamp(2.5rem, 5vw, 6rem);
+  align-items: start;
+  width: 100%;
+}
+
+/* ── LEFT EDITORIAL COLUMN (~52%) ──────────────────────── */
+.footer__left-col {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.8rem, 3.5vh, 2.8rem);
+  max-width: 52vw;
+}
+
+.footer__brand-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.2rem, 2.2vh, 1.8rem);
+}
+
+.footer__logo-wrap {
+  display: inline-block;
+}
+
+.footer__white-logo {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+}
+
+.footer__brand-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer__project-title {
+  font-family: var(--font-editorial);
+  font-size: clamp(1.6rem, 2.4vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  color: #F8F7F3;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.footer__project-loc {
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  color: #A9A39A;
+  text-transform: uppercase;
+}
+
+/* Left Column Thin Divider */
+.footer__left-divider {
+  width: 100%;
+  max-width: 400px;
+  height: 1px;
+  background: rgba(243, 239, 231, 0.14);
+}
+
+/* Main Statement (Left Column Only) */
+.footer__statement-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding-top: 0.25rem;
+}
+
+.footer__statement-title {
+  color: #F8F7F3;
+  font-family: var(--font-editorial);
+  font-size: clamp(48px, 5.4vw, 92px);
+  font-weight: 300;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.footer__statement-line {
+  display: block;
+  white-space: nowrap;
+}
+
+.footer__statement-sub {
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: #A9A39A;
+  text-transform: uppercase;
+  margin: 0;
+  padding-top: 0.25rem;
+}
+
+/* ── RIGHT INFORMATION AREA (~48%) ─────────────────────── */
+.footer__right-col {
+  width: 100%;
+  padding-top: 0.25rem;
+}
+
+.footer__info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2.5rem);
+  align-items: start;
+}
+
+.footer__col-heading {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(243, 239, 231, 0.5);
+  margin-bottom: clamp(0.8rem, 1.6vh, 1.4rem);
+  text-transform: uppercase;
+}
+
+/* Navigation List */
+.footer__nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #A9A39A;
+  transition: all 0.25s ease;
+  padding: 2px 0;
+}
+
+.footer__nav-dot {
+  width: 4px;
+  height: 4px;
+  background-color: #FF4A00;
+  border-radius: 50%;
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: all 0.25s ease;
+}
+
+.footer__nav-label {
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.footer__nav-item:hover {
+  color: #F8F7F3;
+  transform: translateX(3px);
+}
+
+.footer__nav-item:hover .footer__nav-dot {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Contact Column */
+.footer__contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__phone-link {
+  display: inline-block;
+  color: #F8F7F3;
+  transition: color 0.2s ease;
+}
+
+.footer__phone-num {
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  font-variant-numeric: lining-nums proportional-nums;
+  -webkit-font-feature-settings: "lnum" 1;
+}
+
+.footer__phone-link:hover {
+  color: #C5A477;
+}
+
+.footer__enquire-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-family: var(--font-primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #FF4A00;
+  transition: transform 0.25s ease;
+}
+
+.footer__enquire-cta:hover {
+  transform: translateX(3px);
+}
+
+.footer__cta-arrow {
+  transition: transform 0.25s ease;
+}
+
+.footer__enquire-cta:hover .footer__cta-arrow {
+  transform: translateX(3px);
+}
+
+/* RERA Column */
+.footer__rera-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer__rera-num {
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: #F8F7F3;
+  font-variant-numeric: lining-nums proportional-nums;
+  -webkit-font-feature-settings: "lnum" 1;
+}
+
+.footer__rera-sub {
+  font-size: 0.625rem;
+  line-height: 1.5;
+  letter-spacing: 0.14em;
+  color: #A9A39A;
+}
+
+/* ── BOTTOM ARCHITECTURAL LEGAL BAR ────────────────────── */
+.footer__bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: clamp(1.4rem, 2.5vh, 2rem);
+  margin-top: clamp(1rem, 2vh, 1.8rem);
+  border-top: 1px solid rgba(243, 239, 231, 0.1);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  color: rgba(243, 239, 231, 0.45);
+  text-transform: uppercase;
+}
+
+.footer__bottom-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer__bottom-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer__legal-sep {
+  color: rgba(243, 239, 231, 0.25);
+}
+
+.footer__legal-link {
+  color: rgba(243, 239, 231, 0.5);
+}
+
+/* ── RESPONSIVE MEDIA QUERIES ──────────────────────────── */
+@media (max-width: 1100px) {
+  .footer__layout {
+    grid-template-columns: 1fr;
+    gap: 3.5rem;
+  }
+
+  .footer__left-col {
+    max-width: 100%;
+  }
+
+  .footer__statement-line {
+    white-space: normal;
+  }
+
+  .footer__bg-sketch {
+    width: 75%;
+    opacity: 0.05;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    min-height: auto;
+    padding-top: 3.5rem;
+  }
+
+  .footer__info-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer__statement-title {
+    font-size: clamp(2.4rem, 9vw, 3.6rem);
+  }
+
+  .footer__bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .footer__bottom-left {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+

@@ -1,0 +1,49 @@
+/* ═══════════════════════════════════════════════════════════
+   ENQUIRY
+   ═══════════════════════════════════════════════════════════ */
+
+.enquiry {
+  background: var(--bg-secondary);
+  border-top: var(--border-architectural);
+}
+
+.enquiry__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.enquiry__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.enquiry__title {
+  color: var(--text-primary);
+}
+
+.enquiry__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  max-width: 480px;
+}
+
+.enquiry__submit {
+  margin-top: var(--space-md);
+  align-self: flex-start;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .enquiry__layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+
+  .enquiry__form {
+    max-width: none;
+  }
+}

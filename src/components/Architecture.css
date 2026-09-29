@@ -1,0 +1,115 @@
+/* ═══════════════════════════════════════════════════════════
+   SECTION 06 — ARCHITECTURE & FACADE DETAIL
+   Continuous Editorial Design on #F3EFE7
+   ═══════════════════════════════════════════════════════════ */
+
+.architecture {
+  background: var(--bg);
+  border-top: var(--border-architectural);
+}
+
+.architecture__header {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.architecture__label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding-top: 0.25rem;
+}
+
+.architecture__divider {
+  width: 40px;
+}
+
+.architecture__title {
+  color: var(--text-primary);
+  font-family: var(--font-editorial);
+  font-size: clamp(2.4rem, 4.5vw, 4.5rem);
+  font-weight: 300;
+  line-height: 0.96;
+  letter-spacing: -0.02em;
+}
+
+.architecture__title-line {
+  display: block;
+}
+
+/* Visual area */
+.architecture__visual {
+  margin-bottom: var(--space-xl);
+}
+
+.architecture__image-area {
+  position: relative;
+  width: 100%;
+  border: var(--border-architectural);
+  overflow: hidden;
+  background: var(--bg-soft-white);
+  box-sizing: border-box;
+}
+
+.architecture__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+  transform-origin: center center;
+}
+
+/* Description grid */
+.architecture__description {
+  padding-top: var(--space-lg);
+  border-top: var(--border-architectural);
+}
+
+.architecture__desc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.architecture__desc-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.architecture__desc-item .text-body {
+  color: var(--text-charcoal);
+  max-width: 360px;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .architecture__header {
+    grid-template-columns: 120px 1fr;
+    gap: var(--space-md);
+  }
+
+  .architecture__desc-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .architecture__header {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .architecture__label {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .architecture__desc-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+}
